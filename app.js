@@ -18,18 +18,20 @@ var app = express();
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
-console.log("process.env.VCAP_APPLICATION :"+process.env.VCAP_APPLICATION)
+console.log("======================output for env variables======================");
+var services = JSON.parse(process.env.VCAP_SERVICES);
+console.log("process.env.VCAP_APPLICATION :"+services)
 console.log("process.env.VCAP_SERVICES :"+process.env.VCAP_SERVICES)
-var services = JSON.parse(process.env.VCAP_SERVICES || "{}");
-var nlu_config = services.natural-language-understanding[0];
-var nlu_username = nlu_config.credentials.username;
-var nlu_password = nlu_config.credentials.password;
 
-console.log("======================output for debug======================");
-console.log("services :"+services);
-console.log("nlu_config :"+nlu_config);
-console.log("nlu_username :"+nlu_username);
-console.log("nlu_password :"+nlu_password);
+console.log("process.env.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME :" + process.env.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME);
+console.log("process.env.NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD :" + process.env.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME);
+
+//var nlu_config = services.natural-language-understanding[0];
+//console.log("nlu_config :"+nlu_config);
+//var nlu_username = nlu_config.credentials.username;
+//console.log("nlu_username :"+nlu_username);
+//var nlu_password = nlu_config.credentials.password;
+//console.log("nlu_password :"+nlu_password);
 console.log("===========================End===============================");
 
 'use strict';
