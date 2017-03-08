@@ -26,8 +26,8 @@ require('dotenv').config({ silent: true }); //  optional
 const nlu = new NaturalLanguageUnderstandingV1({
   // note: if unspecified here, credentials are pulled from environment properties:
   // NATURAL_LANGUAGE_UNDERSTANDING_USERNAME &  NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD
-  username: '6556a737-8135-4f01-a0f0-a177b6dca4d1',
-  password: 'zlPWIsGMEjDJ',
+  //username: '6556a737-8135-4f01-a0f0-a177b6dca4d1',
+  //password: 'zlPWIsGMEjDJ',
   version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2016_01_23
 });
 
@@ -52,7 +52,8 @@ app.get('/', function(req, res) {
         }
         console.log(JSON.stringify(jsonResult,null,2));
         //res.send(JSON.stringify(jsonResult,null,2));
-        res.json(jsonResult);
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(jsonResult,null,2));
       });
     }
   });	  
