@@ -32,29 +32,8 @@ const nlu = new NaturalLanguageUnderstandingV1({
 });
 
 const filename = 'energy-policy.html';
-fs.readFile(filename, 'utf-8', function(file_error, file_data) {
-  if (file_error) {
-    console.log(file_error);
-  } else {
-    const options = {
-      html: file_data,
-      features: {
-        concepts: {},
-        keywords: {}
-      }
-    };
-    nlu.analyze(options, function(err, res) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(res);
-    });
-  }
-});
 
 app.get('/', function(req, res) {
-
   fs.readFile(filename, 'utf-8', function(file_error, file_data) {
     if (file_error) {
       console.log(file_error);
@@ -71,8 +50,8 @@ app.get('/', function(req, res) {
           console.log(err);
           return;
         }
-        console.log(jsonResult);
-        res.send(jsonResult);
+        console.log(JSON.stringify(jsonResult,null,2));
+        res.send(JSON.stringify(jsonResult,null,2));
       });
     }
   });	  
