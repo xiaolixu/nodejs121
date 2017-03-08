@@ -53,6 +53,31 @@ fs.readFile(filename, 'utf-8', function(file_error, file_data) {
   }
 });
 
+app.get('/', function(req, res) {
+
+  fs.readFile(filename, 'utf-8', function(file_error, file_data) {
+    if (file_error) {
+      console.log(file_error);
+    } else {
+      const options = {
+        html: file_data,
+        features: {
+          concepts: {},
+          keywords: {}
+        }
+      };
+      nlu.analyze(options, function(err, jsonResult) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log(jsonResult);
+        res.send(jsonResult);
+      });
+    }
+  });	  
+});
+
 // start server on the specified port and binding host
 app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
