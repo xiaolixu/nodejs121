@@ -18,22 +18,6 @@ var app = express();
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
-console.log("======================output for env variables======================");
-var services = JSON.parse(process.env.VCAP_SERVICES);
-console.log("process.env.VCAP_APPLICATION :"+services)
-console.log("process.env.VCAP_SERVICES :"+process.env.VCAP_SERVICES)
-
-console.log("process.env.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME :" + process.env.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME);
-console.log("process.env.NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD :" + process.env.NATURAL_LANGUAGE_UNDERSTANDING_USERNAME);
-
-//var nlu_config = services.natural-language-understanding[0];
-//console.log("nlu_config :"+nlu_config);
-//var nlu_username = nlu_config.credentials.username;
-//console.log("nlu_username :"+nlu_username);
-//var nlu_password = nlu_config.credentials.password;
-//console.log("nlu_password :"+nlu_password);
-console.log("===========================End===============================");
-
 'use strict';
 const fs = require('fs');
 const NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
@@ -42,10 +26,8 @@ require('dotenv').config({ silent: true }); //  optional
 const nlu = new NaturalLanguageUnderstandingV1({
   // note: if unspecified here, credentials are pulled from environment properties:
   // NATURAL_LANGUAGE_UNDERSTANDING_USERNAME &  NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD
-  //username: '6556a737-8135-4f01-a0f0-a177b6dca4d1',
-  //password: 'zlPWIsGMEjDJ',
-  username: nlu_username,
-  password: nlu_password,
+  username: '6556a737-8135-4f01-a0f0-a177b6dca4d1',
+  password: 'zlPWIsGMEjDJ',
   version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2016_01_23
 });
 
@@ -69,7 +51,8 @@ app.get('/', function(req, res) {
           return;
         }
         console.log(JSON.stringify(jsonResult,null,2));
-        res.send(JSON.stringify(jsonResult,null,2));
+        //res.send(JSON.stringify(jsonResult,null,2));
+        res.json(jsonResult);
       });
     }
   });	  
